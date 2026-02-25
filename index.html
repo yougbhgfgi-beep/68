@@ -27,6 +27,10 @@
                         premium: ['Montserrat', 'sans-serif'],
                         serif: ['Playfair Display', 'serif'],
                     },
+                    screens: {
+                        'xs': '375px',
+                        ...tailwind.config.theme.screens,
+                    },
                     colors: {
                         rose: {
                             50: '#fff1f2',
@@ -133,6 +137,19 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 0 40px rgba(131, 11, 157, 0.1);
             transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .text-extreme-glow {
+            text-shadow: 0 0 20px rgba(255, 255, 255, 1), 0 0 40px rgba(131, 11, 157, 0.8), 0 0 60px rgba(131, 11, 157, 0.6);
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        .result-heart {
+            color: #5d0870;
+            display: inline-block;
+            filter: drop-shadow(0 0 8px rgba(93, 8, 112, 0.6));
+            transform: scale(1.1);
+            margin: 0 5px;
         }
 
         .premium-counter:hover {
@@ -523,6 +540,67 @@
             background: radial-gradient(circle, rgba(30, 0, 15, 0.98) 0%, rgba(0, 0, 0, 1) 100%);
         }
 
+        @keyframes floating-heart {
+            0% {
+                transform: translateY(100vh) scale(0.5);
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-20vh) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        .flying-heart {
+            position: absolute;
+            cursor: pointer;
+            z-index: 50;
+            animation: floating-heart 4s linear forwards;
+            filter: drop-shadow(0 0 10px rgba(131, 11, 157, 0.5));
+            transition: transform 0.2s;
+        }
+
+        .flying-heart:hover {
+            transform: scale(1.4);
+        }
+
+        @keyframes extreme-glow {
+
+            0%,
+            100% {
+                filter: brightness(1) drop-shadow(0 0 10px white);
+            }
+
+            50% {
+                filter: brightness(2) drop-shadow(0 0 30px white) drop-shadow(0 0 50px #830b9d);
+            }
+        }
+
+        .text-extreme-glow {
+            animation: extreme-glow 1.5s infinite ease-in-out;
+        }
+
+        .flash-effect {
+            animation: screen-flash 0.5s ease-out forwards;
+        }
+
+        @keyframes screen-flash {
+            0% {
+                background: white;
+                opacity: 0.8;
+            }
+
+            100% {
+                background: transparent;
+                opacity: 0;
+            }
+        }
+
         /* Premium Envelope Styling */
         .envelope-container {
             position: relative;
@@ -792,6 +870,12 @@
             </svg>
         );
 
+        const InfinityIcon = ({ className }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
+                <path d="M12 12c-2-2.67-4-4-6-4a4 4 0 1 0 0 8c2 0 4-1.33 6-4Zm0 0c2 2.67 4 4 6 4a4 4 0 0 0 0-8c-2 0-4 1.33-6 4Z" />
+            </svg>
+        );
+
         function usePulse(isPlaying) {
             useEffect(() => {
                 const auras = document.querySelectorAll('.aura-glow');
@@ -857,8 +941,8 @@
             ar: {
                 nav: { memories: "ذكرياتنا", video: "الفيديو", why: "ليه بحبك", gallery: "صورنا" },
                 hero: { subtitle: "قصة حب مكتوبة للابد", btn: "زر المفاجأة ✨" },
-                login: { title: "حكاية عشقنا", day: "اليوم المحظوظ (يوم)", btn: "فتح القلب", quote: "كل لحظة تجمعنا هي البداية..." },
-                meter: { title: "مقياس حبي ليك", label: "نسبة الحب", calc: "جاري حساب كمية الحب...", result: "النتيجة: حب لا نهائي! ♾️💜", hint: "اضغط عشان تشوف النتيجة..." },
+                login: { title: "حكاية عشقنا", day: "يوم", month: "شهر", btn: "فتح القلب", quote: "كل لحظة تجمعنا هي البداية..." },
+                meter: { title: "مقياس حبي ليك", label: "نسبة الحب", calc: "جاري حساب كمية الحب...", result: "النتيجة: حب لا نهائي <span class='result-heart'>💜</span> ∞", hint: "اضغط عشان تشوف النتيجة" },
                 timeline: { title: "خط ذكرياتنا" },
                 video: { title: "ذكرى حلوة 🎥", sub: "لحظات متتنسيش..." },
                 reasons: { title: "ليه بحبك؟ 🤔💜", r1: { t: "حنيتك", d: "أحن وأطيب قلب في الدنيا، بتمسح دمعتي قبل ما تنزل." }, r2: { t: "أماني", d: "معاك بحس إني مسنودة على جبل، ولا حاجة تقدر تكسرني." }, r3: { t: "ضحكتك", d: "لما بتضحك الدنيا كلها بتضحكلي، هي علاجي ودوائي." }, r4: { t: "قلبك الأبيض", d: "أنقى وأطيب قلب، بيسامح ويحب بصدق." }, r5: { t: "عيونك", d: "بشوف فيهم مستقبلي." }, r6: { t: "وجودك", d: "كفاية بس إنك موجود، ده بيخلي الحياة ليها طعم ولون." } },
@@ -880,8 +964,8 @@
             en: {
                 nav: { memories: "Memories", video: "Video", why: "Why I Love You", gallery: "Photos" },
                 hero: { subtitle: "A love story written forever", btn: "Surprise Button ✨" },
-                login: { title: "Our Love Journey", day: "Lucky Day (Day)", btn: "Open Heart", quote: "Every moment together is a beginning..." },
-                meter: { title: "My Love Meter", label: "Love Percentage", calc: "Calculating love amount...", result: "Result: Infinite Love! ♾️💜", hint: "Click to see the result..." },
+                login: { title: "Our Love Journey", day: "Day", month: "Month", btn: "Open Heart", quote: "Every moment together is a beginning..." },
+                meter: { title: "My Love Meter", label: "Love Percentage", calc: "Calculating love amount...", result: "Result: Infinite Love <span class='result-heart'>💜</span> ∞", hint: "Click to see the result" },
                 timeline: { title: "Our Timeline" },
                 video: { title: "Sweet Memory 🎥", sub: "Unforgettable moments..." },
                 reasons: { title: "Why I Love You? 🤔💜", r1: { t: "Your Kindness", d: "The kindest heart in the world, wiping my tears before they fall." }, r2: { t: "My Safety", d: "With you I feel lean on a mountain, nothing can break me." }, r3: { t: "Your Laugh", d: "When you laugh the whole world laughs for me, it's my cure." }, r4: { t: "Your White Heart", d: "The purest heart, forgives and loves sincerely." }, r5: { t: "Your Eyes", d: "I see in them my future." }, r6: { t: "Your Presence", d: "Just your existence is enough, it gives life taste and color." } },
@@ -957,8 +1041,8 @@
             }, [val]);
 
             return (
-                <div className="flex flex-col items-center group px-2 md:px-4">
-                    <div className={`numeric-flip ${isFlipping ? 'flip-change' : ''} text-3xl md:text-5xl font-premium text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]`}>
+                <div className="flex flex-col items-center group px-1 md:px-4">
+                    <div className={`numeric-flip ${isFlipping ? 'flip-change' : ''} text-2xl xs:text-3xl md:text-5xl font-premium text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]`}>
                         {String(displayVal).padStart(2, '0')}
                     </div>
                     <div className="text-[9px] md:text-[11px] font-premium text-purple-200/60 uppercase tracking-[0.2em] mt-1 group-hover:text-[#830b9d] transition-colors">
@@ -1004,7 +1088,7 @@
 
             const t = i18n[lang].clock;
             return (
-                <div className="max-w-4xl mx-auto my-20 p-10 bg-white/5 backdrop-blur-xl rounded-[2.5rem] border border-white/10 shadow-[0_0_50px_rgba(131,11,157,0.15)] text-center relative overflow-hidden group">
+                <div className="max-w-4xl mx-auto my-10 md:my-20 p-4 md:p-10 bg-white/5 backdrop-blur-xl rounded-[1.5rem] md:rounded-[2.5rem] border border-white/10 shadow-[0_0_50px_rgba(131,11,157,0.15)] text-center relative overflow-hidden group">
                     <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#830b9d]/30 to-transparent"></div>
 
                     <div className="mb-10">
@@ -1031,10 +1115,109 @@
 
                     <div className="mt-8 flex justify-center gap-1">
                         <Heart className="w-5 h-5 text-[#830b9d] opacity-40 animate-pulse" />
-                        <Heart className="w-5 h-5 text-[#830b9d] opacity-60 animate-pulse" style={{ animationDelay: '0.2s' }} />
-                        <Heart className="w-5 h-5 text-[#830b9d] opacity-40 animate-pulse" style={{ animationDelay: '0.4s' }} />
+                        <Heart className="w-5 h-5 text-[#830b9d] opacity-60 animate-pulse [animation-delay:200ms]" />
+                        <Heart className="w-5 h-5 text-[#830b9d] opacity-40 animate-pulse [animation-delay:400ms]" />
                     </div>
                 </div>
+            );
+        };
+
+        const HeartGame = ({ lang }) => {
+            const [score, setScore] = useState(0);
+            const [gameHearts, setGameHearts] = useState([]);
+            const [isGameActive, setIsGameActive] = useState(false);
+            const [gameOver, setGameOver] = useState(false);
+
+            const spawnHeart = () => {
+                if (!isGameActive) return;
+                const id = Date.now() + Math.random();
+                const left = Math.random() * 90;
+                const size = Math.random() * 20 + 20;
+                const duration = Math.random() * 2 + 3;
+
+                setGameHearts(prev => [...prev, { id, left, size, duration }]);
+                setTimeout(() => {
+                    setGameHearts(prev => prev.filter(h => h.id !== id));
+                }, duration * 1000);
+            };
+
+            const startGame = () => {
+                setScore(0);
+                setGameOver(false);
+                setIsGameActive(true);
+                setGameHearts([]);
+            };
+
+            useEffect(() => {
+                let interval;
+                if (isGameActive && !gameOver) {
+                    interval = setInterval(spawnHeart, 600);
+                }
+                return () => clearInterval(interval);
+            }, [isGameActive, gameOver]);
+
+            useEffect(() => {
+                if (score >= 20) {
+                    setGameOver(true);
+                    setIsGameActive(false);
+                }
+            }, [score]);
+
+            return (
+                <section id="game" className="py-24 px-4 relative z-10 overflow-hidden">
+                    <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-white font-premium">{lang === 'ar' ? 'صائد القلوب 🏹' : 'Heart Collector 🏹'}</h2>
+
+                    <div className="max-w-4xl mx-auto premium-counter rounded-[2rem] md:rounded-[3rem] p-4 md:p-12 relative h-[400px] md:h-[500px] flex flex-col items-center justify-center overflow-hidden border border-[#830b9d]/30">
+                        {!isGameActive && !gameOver && (
+                            <div className="text-center z-20">
+                                <p className="text-xl text-gray-300 mb-8">{lang === 'ar' ? 'اجمع ٢٠ قلب عشان تشوف المفاجأة!' : 'Collect 20 hearts to see the surprise!'}</p>
+                                <button onClick={startGame} className="shimmer-btn bg-[#830b9d] text-white px-12 py-4 rounded-full font-bold text-xl transition-transform hover:scale-110">
+                                    {lang === 'ar' ? 'ابدأ اللعب' : 'Start Play'}
+                                </button>
+                            </div>
+                        )}
+
+                        {isGameActive && (
+                            <>
+                                <div className="absolute top-8 left-8 text-white font-premium text-2xl z-20">
+                                    {lang === 'ar' ? 'النقاط:' : 'Score:'} <span className="text-[#830b9d]">{score}</span> / 20
+                                </div>
+                                {gameHearts.map(h => (
+                                    <div
+                                        key={h.id}
+                                        className="flying-heart text-2xl cursor-pointer select-none"
+                                        style={{ left: `${h.left}%`, animationDuration: `${h.duration}s` }}
+                                        onClick={() => {
+                                            setScore(s => s + 1);
+                                            setGameHearts(prev => prev.filter(heart => heart.id !== h.id));
+                                        }}
+                                    >
+                                        💖
+                                    </div>
+                                ))}
+                            </>
+                        )}
+
+                        {gameOver && (
+                            <div className="text-center z-20">
+                                <Heart className="w-24 h-24 text-[#830b9d] mx-auto mb-6 animate-bounce" />
+                                <h3 className="text-4xl font-bold text-white mb-4 text-extreme-glow">
+                                    {lang === 'ar' ? 'مبروووك يا روحي! 🎉' : 'Congratulations Love! 🎉'}
+                                </h3>
+                                <p className="text-xl text-purple-200 italic mb-8">
+                                    {lang === 'ar' ? 'أنتَ أغلى إنسان في العالم... ومكاني الوحيد في قلبك' : 'You are the most precious person... and my only place is in your heart'}
+                                </p>
+                                <button onClick={startGame} className="text-[#830b9d] underline font-bold">
+                                    {lang === 'ar' ? 'العب تاني؟' : 'Play Again?'}
+                                </button>
+                            </div>
+                        )}
+
+                        <div className="absolute inset-0 opacity-10 pointer-events-none">
+                            <div className="w-full h-full bg-[radial-gradient(circle_at_center,#830b9d_0%,transparent_70%)]"></div>
+                        </div>
+                    </div>
+                </section>
             );
         };
 
@@ -1114,6 +1297,7 @@
             const [lang, setLang] = useState('ar');
             const [isLogged, setIsLogged] = useState(false);
             const [day, setDay] = useState("");
+            const [month, setMonth] = useState("");
             const [showEnvelope, setShowEnvelope] = useState(false);
             const [showSecret, setShowSecret] = useState(false);
             const [showFinalScene, setShowFinalScene] = useState(false);
@@ -1126,7 +1310,7 @@
             const firstSightDate = new Date("2024-02-27T00:00:00");
 
             const handleLogin = () => {
-                if (day === "27") {
+                if (day === "27" && month === "2") {
                     setIsLogged(true);
                     if (audioRef.current) {
                         const playPromise = audioRef.current.play();
@@ -1228,17 +1412,28 @@
                                 </div>
 
                                 <div className="space-y-6">
-                                    <div className="relative group/input">
-                                        <input
-                                            type="password"
-                                            placeholder={t.login.day}
-                                            value={day}
-                                            onChange={(e) => setDay(e.target.value)}
-                                            onKeyDown={(e) => e.key === 'Enter' && handleLogin()}
-                                            className="w-full p-4 pl-12 rounded-2xl border border-white/10 bg-white/5 focus:border-[#830b9d] focus:bg-white/10 focus:outline-none text-center text-xl text-white shadow-2xl transition-all placeholder-white/20 backdrop-blur-sm"
-                                        />
-                                        <div className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20">
-                                            <Lock className="w-5 h-5" />
+                                    <div className="flex gap-4">
+                                        <div className="relative group/input flex-1">
+                                            <input
+                                                type="password"
+                                                placeholder={t.login.day}
+                                                className="w-full bg-white/5 border border-white/10 p-4 md:p-5 rounded-2xl text-white text-center focus:outline-none focus:ring-2 focus:ring-[#830b9d]/50 focus:border-[#830b9d] transition-all placeholder:text-white/20 text-lg md:text-xl font-bold tracking-widest"
+                                                value={day}
+                                                onChange={(e) => setDay(e.target.value)}
+                                                onKeyDown={(e) => e.key === 'Enter' && handleLogin()}
+                                            />
+                                            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-transparent via-white/5 to-transparent pointer-events-none opacity-0 group-hover/input:opacity-100 transition-opacity"></div>
+                                        </div>
+                                        <div className="relative group/input flex-1">
+                                            <input
+                                                type="password"
+                                                placeholder={t.login.month}
+                                                className="w-full bg-white/5 border border-white/10 p-4 md:p-5 rounded-2xl text-white text-center focus:outline-none focus:ring-2 focus:ring-[#830b9d]/50 focus:border-[#830b9d] transition-all placeholder:text-white/20 text-lg md:text-xl font-bold tracking-widest"
+                                                value={month}
+                                                onChange={(e) => setMonth(e.target.value)}
+                                                onKeyDown={(e) => e.key === 'Enter' && handleLogin()}
+                                            />
+                                            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-transparent via-white/5 to-transparent pointer-events-none opacity-0 group-hover/input:opacity-100 transition-opacity"></div>
                                         </div>
                                     </div>
 
@@ -1257,9 +1452,9 @@
                     ) : (
                         <div className="relative z-10">
                             {/* Sticky Navigation */}
-                            <nav className="fixed top-0 left-0 right-0 z-40 bg-black/40 backdrop-blur-lg border-b border-white/10 px-4 py-3 flex flex-col items-center gap-2">
-                                <div className="text-xl font-bold font-script text-[#830b9d]">ToTo & Etsh</div>
-                                <div className="flex gap-4 text-[10px] xs:text-xs tracking-tighter sm:text-sm sm:gap-6">
+                            <nav className="fixed top-0 left-0 right-0 z-40 bg-black/60 backdrop-blur-xl border-b border-white/10 px-4 py-2 md:py-3 flex flex-col items-center gap-1 md:gap-2 transition-all">
+                                <div className="text-lg md:text-xl font-bold font-script text-[#830b9d]">ToTo & Etsh</div>
+                                <div className="flex gap-4 text-[9px] xs:text-[11px] sm:text-xs md:text-sm tracking-tight sm:gap-6 uppercase font-premium">
                                     <a href="#timeline" className="hover:text-[#830b9d] transition-colors whitespace-nowrap">{t.nav.memories}</a>
                                     <a href="#video" className="hover:text-[#830b9d] transition-colors">{t.nav.video}</a>
                                     <a href="#reasons" className="hover:text-[#830b9d] transition-colors">{t.nav.why}</a>
@@ -1302,10 +1497,10 @@
                                 <section className="min-h-screen flex flex-col items-center justify-center text-center p-4 relative overflow-hidden">
                                     <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-[#830b9d]/20 to-transparent -z-10"></div>
 
-                                    <h1 className="text-5xl md:text-9xl font-bold mb-4 text-white drop-shadow-sm font-script pb-4 break-words px-4">
+                                    <h1 className="text-4xl xs:text-5xl md:text-9xl font-bold mb-4 text-white drop-shadow-sm font-script pb-2 md:pb-4 break-words px-4">
                                         ToTo & Etsh
                                     </h1>
-                                    <p className="text-xl md:text-3xl text-gray-300 mb-10 font-light">{t.hero.subtitle}</p>
+                                    <p className="text-base xs:text-lg md:text-3xl text-gray-300 mb-8 md:mb-10 font-light px-6">{t.hero.subtitle}</p>
 
                                     <button onClick={() => { setShowSecret(true); setTimeout(() => setShowSecret(false), 2000); }}
                                         className="group relative overflow-hidden bg-white text-[#830b9d] px-10 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 font-bold text-lg border border-pink-100">
@@ -1323,9 +1518,9 @@
 
 
                             {/* Love Meter Section */}
-                            <section className="py-20 px-4 text-center relative z-10">
-                                <h2 className="text-4xl font-bold mb-10 text-[#830b9d]">{t.meter.title}</h2>
-                                <div className="max-w-2xl mx-auto bg-white/15 backdrop-blur-lg p-8 rounded-3xl shadow-[0_0_30px_rgba(131,11,157,0.2)] border border-white/10 cursor-pointer group transition-all hover:bg-white/20"
+                            <section className="py-12 md:py-20 px-4 text-center relative z-10">
+                                <h2 className="text-3xl md:text-4xl font-bold mb-8 md:10 text-[#830b9d]">{t.meter.title}</h2>
+                                <div className="max-w-2xl mx-auto bg-white/15 backdrop-blur-lg p-6 md:p-12 rounded-3xl shadow-[0_0_30px_rgba(131,11,157,0.2)] border border-white/10 cursor-pointer group transition-all hover:bg-white/20"
                                     onClick={(e) => {
                                         if (e.currentTarget.classList.contains('calculating')) return;
                                         e.currentTarget.classList.add('calculating');
@@ -1347,8 +1542,15 @@
                                         heart.style.animationDuration = "0.5s";
 
                                         setTimeout(() => {
-                                            text.innerText = t.meter.result;
-                                            text.classList.add("text-3xl", "font-bold", "text-[#830b9d]");
+                                            text.innerHTML = t.meter.result;
+                                            text.classList.remove("text-pink-300", "to-pink-300", "text-white/50");
+                                            text.classList.add("text-3xl", "font-bold", "text-white", "animate-fade-in");
+
+                                            // Add Flash Effect
+                                            const flash = document.createElement('div');
+                                            flash.className = 'fixed inset-0 flash-effect z-[200] pointer-events-none';
+                                            document.body.appendChild(flash);
+                                            setTimeout(() => flash.remove(), 1000);
                                             heart.style.transform = "scale(1.5)";
                                             heart.style.animationDuration = "1s";
 
@@ -1378,10 +1580,9 @@
                                                     {t.meter.label}
                                                 </span>
                                             </div>
-                                            <div className="text-right">
-                                                <span className="text-xs font-semibold inline-block text-pink-100">
-                                                    ∞ %
-                                                </span>
+                                            <div className="text-right flex items-center gap-1">
+                                                <InfinityIcon className="w-5 h-5 text-pink-100" />
+                                                <span className="text-sm font-bold text-pink-100">%</span>
                                             </div>
                                         </div>
                                         <div className="overflow-hidden h-10 mb-4 text-xs flex rounded-full bg-white/20 shadow-inner border border-white/10">
@@ -1390,7 +1591,7 @@
                                         <div className="flex justify-center mt-4">
                                             <Heart className="meter-heart w-32 h-32 text-[#830b9d] animate-pulse drop-shadow-[0_0_15px_rgba(185,7,114,0.5)] transition-transform duration-200" />
                                         </div>
-                                        <p className="status-text mt-4 text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-300 to-pink-300">
+                                        <p className="status-text mt-4 text-xl font-bold text-white">
                                             {t.meter.hint}
                                         </p>
                                     </div>
@@ -1399,6 +1600,8 @@
 
 
 
+
+                            <HeartGame lang={lang} />
 
                             {/* Timeline */}
                             <section id="timeline" className="py-32 px-4 relative z-10">
@@ -1477,14 +1680,14 @@
 
 
                             {/* Reasons Why Section */}
-                            <section id="reasons" className="py-24 px-4 relative z-10">
-                                <h2 className="text-4xl font-bold text-center mb-16 text-[#830b9d]">{t.reasons.title}</h2>
-                                <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                            <section id="reasons" className="py-16 md:py-24 px-4 relative z-10">
+                                <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 md:16 text-[#830b9d]">{t.reasons.title}</h2>
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
                                     {[
                                         t.reasons.r1, t.reasons.r2, t.reasons.r3,
                                         t.reasons.r4, t.reasons.r5, t.reasons.r6
                                     ].map((card, i) => (
-                                        <div key={i} className="bg-white/5 p-8 rounded-3xl shadow-xl border border-white/5 hover:-translate-y-2 hover:bg-white/10 transition-all duration-300 group backdrop-blur-sm">
+                                        <div key={i} className="bg-white/5 p-6 md:p-8 rounded-3xl shadow-xl border border-white/5 hover:-translate-y-2 hover:bg-white/10 transition-all duration-300 group backdrop-blur-sm">
                                             <div className="w-12 h-12 bg-pink-900/50 rounded-full flex items-center justify-center mb-6 group-hover:bg-pink-600 transition-colors border border-pink-500/30">
                                                 <Heart className="w-6 h-6 text-pink-400 group-hover:text-white transition-colors" />
                                             </div>
@@ -1576,7 +1779,7 @@
 
                     <div className="relative z-10 max-w-4xl w-full flex flex-col items-center justify-center min-h-[60vh]">
                         {step === 1 && (
-                            <h1 className="text-5xl md:text-7xl font-extrabold text-white drop-shadow-[0_0_15px_rgba(131,11,157,0.8)] animate-slide-up leading-tight" dangerouslySetInnerHTML={{ __html: t.scene1 }}></h1>
+                            <h1 className="text-3xl xs:text-5xl md:text-7xl font-extrabold text-white drop-shadow-[0_0_15px_rgba(131,11,157,0.8)] animate-slide-up leading-tight px-4" dangerouslySetInnerHTML={{ __html: t.scene1 }}></h1>
                         )}
 
                         {step >= 2 && step < 10 && (
@@ -1592,8 +1795,8 @@
 
                         {step >= 11 && (
                             <div className="absolute inset-0 flex flex-col items-center justify-center bg-black animate-fade-in">
-                                <h1 className="text-7xl md:text-9xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-purple-500 to-pink-600 animate-pulse-slow mb-8">
-                                    ToTo <span className="text-white mx-4">&</span> Etsh
+                                <h1 className="text-4xl xs:text-6xl md:text-9xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-purple-500 to-pink-600 animate-pulse-slow mb-8 px-4">
+                                    ToTo <span className="text-white mx-2 md:mx-4">&</span> Etsh
                                 </h1>
 
                                 {step >= 12 && (
