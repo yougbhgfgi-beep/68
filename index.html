@@ -1034,11 +1034,13 @@
             const [isPlaying, setIsPlaying] = useState(false);
             const [selectedImage, setSelectedImage] = useState(null);
             const [showLongPressSecret, setShowLongPressSecret] = useState(false);
+            const [secretCount, setSecretCount] = useState(0);
             const audioRef = useRef(null);
 
             useLongPress(() => {
-                if (isLogged) {
+                if (isLogged && secretCount < 3) {
                     setShowLongPressSecret(true);
+                    setSecretCount(prev => prev + 1);
                     setTimeout(() => setShowLongPressSecret(false), 4000);
                 }
             });
