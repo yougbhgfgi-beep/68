@@ -14,7 +14,7 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <!-- Google Fonts -->
     <link
-        href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700&family=Dancing+Script:wght@700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700&family=Dancing+Script:wght@700&family=Montserrat:wght@400;700;900&family=Playfair+Display:wght@700;900&display=swap"
         rel="stylesheet">
 
     <script>
@@ -24,6 +24,8 @@
                     fontFamily: {
                         sans: ['Tajawal', 'sans-serif'],
                         script: ['Dancing Script', 'cursive'],
+                        premium: ['Montserrat', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
                     },
                     colors: {
                         rose: {
@@ -100,6 +102,58 @@
             100% {
                 transform: translate(20%, 20%) scale(1.2);
             }
+        }
+
+        @keyframes textShimmer {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .text-shimmer {
+            background: linear-gradient(90deg, #fff, #830b9d, #fff);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textShimmer 4s linear infinite;
+        }
+
+        .premium-counter {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 40px rgba(131, 11, 157, 0.1);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .premium-counter:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 60px rgba(131, 11, 157, 0.25);
+            transform: translateY(-5px);
+        }
+
+        .numeric-flip {
+            display: inline-block;
+            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+        }
+
+        .flip-change {
+            transform: translateY(-10px) rotateX(20deg);
+            opacity: 0.2;
+        }
+
+        .glow-soft {
+            text-shadow: 0 0 20px rgba(131, 11, 157, 0.4);
         }
 
         .shimmer-btn {
@@ -816,9 +870,9 @@
                     title: "خط ذكرياتنا",
                     items: [
                         { text: "أجمل صدفة في حياتي 💖", date: "ايدي في ايدك", desc: "طول ما ايدينا ماسكة بعض، مبخافش من أي حاجة في الدنيا. أنت قوتي وسندي اللي بتسند عليه لما الدنيا تميل. لمسة ايدك دي بتديني طاقة تهد جبال وتبنيها عشاني يا حبيبي." },
-                        { text: "مشوار عمرنا سوا ", date: "معاك", desc: "كل خطوة بنمشيها سوا بتبقى أجمل، وايدي في ايدك بتنور طريقي. أنت مش بس حبيبي، أنت رفيق الدرب اللي محليه، ومعاك المشوار مهما كان صعب بيبقى رحلة حب." },
+                        { text: "مشوار عمرنا سوا  👩‍❤️‍👨", date: "معاك", desc: "كل خطوة بنمشيها سوا بتبقى أجمل، وايدي في ايدك بتنور طريقي. أنت مش بس حبيبي، أنت رفيق الدرب اللي محليه، ومعاك المشوار مهما كان صعب بيبقى رحلة حب." },
                         { text: "لمسة دفا وحنية 🌍", date: "راحتي", desc: "بلاقي في لمستك كل معاني الحنية والاحتواء، كأن العالم كله بيختفي ومش بيتبقى غيرنا. ايدك هي بيتي ومطرحي، وهي الدفا اللي بحس بيه في عز البرد." },
-                        { text: "وعد 💍", date: "لآخر العمر", desc: "وعد مني إننا عمرنا ما نسيب ايد بعض أبداً، مهما حصل هفضل ماسكة فيك ومتمسكة بيك لآخر نفس في عمري. ايدنا في ايد بعض ده ميثاق غليظ ومبيتكسرش." },
+                        { text: "وعد 💍", date: "لآخر العمر", desc: "وعد مني إننا عمرنا ما نسيب ايد بعض أبداً، مهما حصل هفضل ماسكة فيك ومتمسكة بيك لآخر نفس في عمري. ايدنا في ايد بعض ده ميثاق غليظ." },
                         { text: "اكتفائي بيك ✨", date: "كل دنيتي", desc: "مش عايزة من الدنيا غير إني أفضل جنبك وماسكة ايدك، ده بالنسبالي بالدنيا وما فيها. كفاية عليا نظرة لعيونك وأنا ماسكة ايدك، بحس إني ملكت الكون كله." }
                     ]
                 }
@@ -839,7 +893,7 @@
                     title: "Our Timeline",
                     items: [
                         { text: "Most beautiful coincidence 💖", date: "My hand in yours", desc: "As long as our hands are together, I fear nothing in the world. You are my strength and support. This touch gives me the energy to move mountains for me, my love." },
-                        { text: "Our life journey together ", date: "With you", desc: "Every step we take together becomes more beautiful, and my hand in yours lights up my path. You are not just my lover, but the companion who makes the journey sweet." },
+                        { text: "Our life journey together  👩‍❤️‍👨", date: "With you", desc: "Every step we take together becomes more beautiful, and my hand in yours lights up my path. You are not just my lover, but the companion who makes the journey sweet." },
                         { text: "Warmth and tenderness 🌍", date: "My comfort", desc: "I find in your touch all meanings of tenderness and containment, as if the whole world disappears and only we remain. Your hand is my home and my warmth in the cold." },
                         { text: "A promise 💍", date: "To the end of life", desc: "A promise from me that we will never let go of each other's hands, no matter what happens I will stay holding onto you until my last breath. Our hand in hand is a sacred bond." },
                         { text: "My sufficiency in you ✨", date: "My whole world", desc: "I want nothing from the world but to stay by your side holding your hand. That's for me the whole world. Just a look into your eyes while holding your hand, I feel like I own the universe." }
@@ -887,24 +941,61 @@
             );
         };
 
+        const FlipUnit = ({ val, unit }) => {
+            const [displayVal, setDisplayVal] = useState(val);
+            const [isFlipping, setIsFlipping] = useState(false);
+
+            useEffect(() => {
+                if (val !== displayVal) {
+                    setIsFlipping(true);
+                    const timeout = setTimeout(() => {
+                        setDisplayVal(val);
+                        setIsFlipping(false);
+                    }, 400);
+                    return () => clearTimeout(timeout);
+                }
+            }, [val]);
+
+            return (
+                <div className="flex flex-col items-center group px-2 md:px-4">
+                    <div className={`numeric-flip ${isFlipping ? 'flip-change' : ''} text-3xl md:text-5xl font-premium text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]`}>
+                        {String(displayVal).padStart(2, '0')}
+                    </div>
+                    <div className="text-[9px] md:text-[11px] font-premium text-purple-200/60 uppercase tracking-[0.2em] mt-1 group-hover:text-[#830b9d] transition-colors">
+                        {unit}
+                    </div>
+                </div>
+            );
+        };
+
         const RelationshipClock = ({ startDate, lang }) => {
             const [time, setTime] = useState({});
 
             useEffect(() => {
                 const calculate = () => {
                     const now = new Date();
-                    const diff = now - startDate;
-                    const totalSeconds = Math.floor(diff / 1000);
-                    const totalMinutes = Math.floor(totalSeconds / 60);
-                    const totalHours = Math.floor(totalMinutes / 60);
-                    const totalDays = Math.floor(totalHours / 24);
-                    const years = Math.floor(totalDays / 365);
-                    const months = Math.floor((totalDays % 365) / 30);
-                    const days = totalDays % 30;
-                    const hours = totalHours % 24;
-                    const minutes = totalMinutes % 60;
-                    const seconds = totalSeconds % 60;
-                    setTime({ years, months, days, hours, minutes, seconds });
+                    const start = new Date(startDate);
+                    let years = now.getFullYear() - start.getFullYear();
+                    let months = now.getMonth() - start.getMonth();
+                    let days = now.getDate() - start.getDate();
+                    if (days < 0) {
+                        months -= 1;
+                        const lastMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+                        days += lastMonth.getDate();
+                    }
+                    if (months < 0) {
+                        years -= 1;
+                        months += 12;
+                    }
+                    const diffMs = now - start;
+                    setTime({
+                        years,
+                        months,
+                        days,
+                        hours: Math.floor((diffMs / (1000 * 60 * 60)) % 24),
+                        minutes: Math.floor((diffMs / (1000 * 60)) % 60),
+                        seconds: Math.floor((diffMs / 1000) % 60)
+                    });
                 };
                 calculate();
                 const interval = setInterval(calculate, 1000);
@@ -913,22 +1004,35 @@
 
             const t = i18n[lang].clock;
             return (
-                <div className="text-center mb-10 p-6 bg-white/5 backdrop-blur-md rounded-3xl border border-white/10">
-                    <h3 className="text-pink-400 mb-6 text-xl">{t.start}</h3>
-                    <div className="flex justify-center gap-4 md:gap-8 flex-wrap">
-                        {[
-                            { val: time.years, unit: t.year },
-                            { val: time.months, unit: t.month },
-                            { val: time.days, unit: t.day },
-                            { val: time.hours, unit: t.hour },
-                            { val: time.minutes, unit: t.min },
-                            { val: time.seconds, unit: t.sec }
-                        ].map((item, i) => (
-                            <div key={i} className="flex flex-col items-center min-w-[60px] md:min-w-[70px]">
-                                <span className="text-3xl md:text-5xl font-bold text-white mb-1">{item.val || 0}</span>
-                                <span className="text-white/40 text-[10px] md:text-sm uppercase tracking-wider">{item.unit}</span>
-                            </div>
-                        ))}
+                <div className="max-w-4xl mx-auto my-20 p-10 bg-white/5 backdrop-blur-xl rounded-[2.5rem] border border-white/10 shadow-[0_0_50px_rgba(131,11,157,0.15)] text-center relative overflow-hidden group">
+                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#830b9d]/30 to-transparent"></div>
+
+                    <div className="mb-10">
+                        <p className="text-[#830b9d] font-script text-2xl md:text-3xl mb-2 italic">Together Forever</p>
+                        <h3 className="text-white/60 text-sm md:text-base font-premium tracking-widest uppercase">Since 27 February 2024</h3>
+                    </div>
+
+                    <div className="flex flex-wrap justify-center items-center gap-2 md:gap-4">
+                        <FlipUnit val={time.years} unit={t.year} />
+                        <span className="text-white/20 text-2xl md:text-4xl pb-6 hidden md:block">•</span>
+                        <FlipUnit val={time.months} unit={t.month} />
+                        <span className="text-white/20 text-2xl md:text-4xl pb-6 hidden md:block">•</span>
+                        <FlipUnit val={time.days} unit={t.day} />
+
+                        <div className="w-full h-px bg-white/5 my-4 md:hidden"></div>
+                        <span className="hidden md:block w-px h-12 bg-white/10 mx-4"></span>
+
+                        <FlipUnit val={time.hours} unit={t.hour} />
+                        <span className="text-white/20 text-2xl md:text-4xl pb-6">:</span>
+                        <FlipUnit val={time.minutes} unit={t.min} />
+                        <span className="text-white/20 text-2xl md:text-4xl pb-6">:</span>
+                        <FlipUnit val={time.seconds} unit={t.sec} />
+                    </div>
+
+                    <div className="mt-8 flex justify-center gap-1">
+                        <Heart className="w-5 h-5 text-[#830b9d] opacity-40 animate-pulse" />
+                        <Heart className="w-5 h-5 text-[#830b9d] opacity-60 animate-pulse" style={{ animationDelay: '0.2s' }} />
+                        <Heart className="w-5 h-5 text-[#830b9d] opacity-40 animate-pulse" style={{ animationDelay: '0.4s' }} />
                     </div>
                 </div>
             );
@@ -1221,7 +1325,7 @@
                             {/* Love Meter Section */}
                             <section className="py-20 px-4 text-center relative z-10">
                                 <h2 className="text-4xl font-bold mb-10 text-[#830b9d]">{t.meter.title}</h2>
-                                <div className="max-w-2xl mx-auto bg-white/5 backdrop-blur-lg p-8 rounded-3xl shadow-xl border border-white/10 cursor-pointer group transition-all hover:bg-white/10"
+                                <div className="max-w-2xl mx-auto bg-white/15 backdrop-blur-lg p-8 rounded-3xl shadow-[0_0_30px_rgba(131,11,157,0.2)] border border-white/10 cursor-pointer group transition-all hover:bg-white/20"
                                     onClick={(e) => {
                                         if (e.currentTarget.classList.contains('calculating')) return;
                                         e.currentTarget.classList.add('calculating');
@@ -1270,17 +1374,17 @@
                                     <div className="relative pt-1">
                                         <div className="flex mb-2 items-center justify-between">
                                             <div>
-                                                <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-pink-200 bg-pink-900/50">
+                                                <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-pink-100 bg-[#830b9d]/30">
                                                     {t.meter.label}
                                                 </span>
                                             </div>
                                             <div className="text-right">
-                                                <span className="text-xs font-semibold inline-block text-pink-300">
+                                                <span className="text-xs font-semibold inline-block text-pink-100">
                                                     ∞ %
                                                 </span>
                                             </div>
                                         </div>
-                                        <div className="overflow-hidden h-10 mb-4 text-xs flex rounded-full bg-gray-700 shadow-inner border border-white/10">
+                                        <div className="overflow-hidden h-10 mb-4 text-xs flex rounded-full bg-white/20 shadow-inner border border-white/10">
                                             <div style={{ width: "10%" }} className="progress-bar shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-gradient-to-r from-[#830b9d] via-purple-500 to-[#830b9d] animate-pulse-slow transition-all duration-300"></div>
                                         </div>
                                         <div className="flex justify-center mt-4">
@@ -1318,7 +1422,10 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <h3 className="text-xl font-bold text-purple-100 group-hover:text-[#830b9d] transition-colors mb-2">{item.text}</h3>
+                                                    <h3 className="text-xl font-bold text-purple-100 group-hover:text-[#830b9d] transition-colors mb-2 flex items-center gap-2">
+                                                        <span>{item.text.replace(/👩‍❤️‍👨/, '').trim()}</span>
+                                                        {item.text.includes('👩‍❤️‍👨') && <span className="text-2xl inline-block transform group-hover:scale-125 transition-transform duration-300">👩‍❤️‍👨</span>}
+                                                    </h3>
                                                     <p className="text-pink-300 text-sm font-mono mb-3">{item.date}</p>
                                                     <p className="text-gray-300 text-sm leading-relaxed">{item.desc}</p>
                                                 </div>
