@@ -763,24 +763,6 @@
             return offset;
         }
 
-        function useLongPress(callback, ms = 2000) {
-            useEffect(() => {
-                let timer;
-                const start = () => timer = setTimeout(callback, ms);
-                const stop = () => clearTimeout(timer);
-                window.addEventListener('touchstart', start);
-                window.addEventListener('touchend', stop);
-                window.addEventListener('mousedown', start);
-                window.addEventListener('mouseup', stop);
-                return () => {
-                    window.removeEventListener('touchstart', start);
-                    window.removeEventListener('touchend', stop);
-                    window.removeEventListener('mousedown', start);
-                    window.removeEventListener('mouseup', stop);
-                };
-            }, [callback, ms]);
-        }
-
         function useParticleSystem() {
             useEffect(() => {
                 const createParticle = (x, y) => {
@@ -814,29 +796,29 @@
             }, []);
         }
 
-        const finalMessageAR = `حبيبي\nعايزة اقولك كام كلمة كدة ..... انا بحبك اوووي بجد وبحب وجودك معايا في كل حاجة وكل لحظة بجد عايزة اقولك انك وحشتني اوووي ووحشني وقتنا في الجامعه ووحشني خناقنا سوا جدا بجد .... كل سنه وانت معايا كل سنة وانت ضهر وسند ليا قبل متكون حبيبي كل سنة واحنا ديما ماسكين في بعض بجد انا مش قادرة اقولك انا قد اي مبسوطة باللحظة الي اتجمعت فيها معاك واليوم والساعة والثانية الي عرفنا بعض فيها بجد شكرا علي كل لحظة انت استحملتني فيها واستحملت نكدي وزعلي وكنت بتمسك فيا ديما بجد انا بحبك اوووي وبجد ده كلمه عمرها مهتوصف انا اد اي بحبك بصراحة بس انت ليك مكان كبير في قلبي بجد وربنا يخليك ليا وتفضل ليا اخ وصاحب وحبيب واب وكل حاجة في الدنيا وافضل مطلعة عينك ديما كده وانت ديما علي قلبك زي العسل بس بجد انا بحبك اوي وبحبك اشركك كل تفاصيلي وانت بجد بتقعد تسمع الرغي بتاعي ديما وعمرك مزهقت مني وديما بتسبني اعك وانت بتلم ورايا وديما بتدلعني علي حسك بجد وشكرا علي كل الوقت الي قضيناه سوا والي لسه هنقضيه اكيد ونسافر سوا بقي ونفتح مشروعنا سوا زي مكنا متفقين مع بعض شكرا لانك كنت ليا سند في كل وقت ..... بحبك اد البحر وسمكاتوو يا اغلي واحلي اتش في الدنيا وعقبال المليون سنة واحنا سوا وكتف في كتف يحبيبي🌍\n\nبحبك بعدد الثواني (63,158,400) الي قضيناها سوا بجد👀`;
-        const finalMessageEN = `My love\nI want to say a few words to you ..... I really love you so much and I love your presence with me in everything and every moment really I want to tell you that I miss you so much and I miss our time at university and I miss our fights together so much really .... every year you are with me every year you are a back and support for me before being my lover every year and we are always holding onto each other really I can't tell you how happy I am with the moment we came together and the day, hour and second we knew each other really thank you for every moment you endured me and endured my grumpiness and sadness and you were always holding onto me really I love you so much and really this is a word that will never describe how much I love you honestly but you have a big place in my heart really and may God keep you for me and stay for me a brother, friend, lover, father and everything in the world and I will always keep making you crazy like that and you are always like honey but really I love you so much and I love sharing all my details with you and you really sit and listen to my chatter always and you never got bored of me and you always let me mess up and you clean up after me and you always pamper me really and thank you for all the time we spent together and that we will still spend for sure and travel together and open our project together as we were agreeing with each other thank you because you were my support in every time ..... I love you as much as the sea and its fish, the most precious and sweetest Etsh in the world and here's to a million years of us together and shoulder to shoulder my baby🌍\n\nI love you with the number of seconds (63,158,400) we spent together really👀`;
+        const finalMessageAR = `عايزة اقولك كام كلمة كدة ..... انا بحبك اوووي بجد وبحب وجودك معايا في كل حاجة وكل لحظة بجد عايزة اقولك انك وحشتني اوووي ووحشني وقتنا في الجامعه ووحشني خناقنا سوا جدا بجد .... كل سنه وانت معايا كل سنة وانت ضهر وسند ليا قبل متكون حبيبي كل سنة واحنا ديما ماسكين في بعض بجد انا مش قادرة اقولك انا قد اي مبسوطة باللحظة الي اتجمعت فيها معاك واليوم والساعة والثانية الي عرفنا بعض فيها بجد شكرا علي كل لحظة انت استحملتني فيها واستحملت نكدي وزعلي وكنت بتمسك فيا ديما بجد انا بحبك اوووي وبجد ده كلمه عمرها مهتوصف انا اد اي بحبك بصراحة بس انت ليك مكان كبير في قلبي بجد وربنا يخليك ليا وتفضل ليا اخ وصاحب وحبيب واب وكل حاجة في الدنيا وافضل مطلعة عينك ديما كده وانت ديما علي قلبك زي العسل بس بجد انا بحبك اوي وبحبك اشركك كل تفاصيلي وانت بجد بتقعد تسمع الرغي بتاعي ديما وعمرك مزهقت مني وديما بتسبني اعك وانت بتلم ورايا وديما بتدلعني علي حسك بجد وشكرا علي كل الوقت الي قضيناه سوا والي لسه هنقضيه اكيد ونسافر سوا بقي ونفتح مشروعنا سوا زي مكنا متفقين مع بعض شكرا لانك كنت ليا سند في كل وقت ..... بحبك اد البحر وسمكاتوو يا اغلي واحلي اتش في الدنيا وعقبال المليون سنة واحنا سوا وكتف في كتف يحبيبي🌍\n\nبحبك بعدد الثواني (63,158,400) الي قضيناها سوا بجد👀`;
+        const finalMessageEN = `I want to say a few words to you ..... I really love you so much and I love your presence with me in everything and every moment really I want to tell you that I miss you so much and I miss our time at university and I miss our fights together so much really .... every year you are with me every year you are a back and support for me before being my lover every year and we are always holding onto each other really I can't tell you how happy I am with the moment we came together and the day, hour and second we knew each other really thank you for every moment you endured me and endured my grumpiness and sadness and you were always holding onto me really I love you so much and really this is a word that will never describe how much I love you honestly but you have a big place in my heart really and may God keep you for me and stay for me a brother, friend, lover, father and everything in the world and I will always keep making you crazy like that and you are always like honey but really I love you so much and I love sharing all my details with you and you really sit and listen to my chatter always and you never got bored of me and you always let me mess up and you clean up after me and you always pamper me really and thank you for all the time we spent together and that we will still spend for sure and travel together and open our project together as we were agreeing with each other thank you because you were my support in every time ..... I love you as much as the sea and its fish, the most precious and sweetest Etsh in the world and here's to a million years of us together and shoulder to shoulder my baby🌍\n\nI love you with the number of seconds (63,158,400) we spent together really👀`;
 
         const i18n = {
             ar: {
                 nav: { memories: "ذكرياتنا", video: "الفيديو", why: "ليه بحبك", gallery: "صورنا" },
                 hero: { subtitle: "قصة حب مكتوبة للابد", btn: "زر المفاجأة ✨" },
-                login: { title: "بوابة حبنا", day: "اليوم المحظوظ (يوم)", btn: "فتح القلب", quote: "كل لحظة تجمعنا هي البداية..." },
+                login: { title: "حكاية عشقنا", day: "اليوم المحظوظ (يوم)", btn: "فتح القلب", quote: "كل لحظة تجمعنا هي البداية..." },
                 meter: { title: "مقياس حبي ليك", label: "نسبة الحب", calc: "جاري حساب كمية الحب...", result: "النتيجة: حب لا نهائي! ♾️💜", hint: "اضغط عشان تشوف النتيجة..." },
                 timeline: { title: "خط ذكرياتنا" },
                 video: { title: "ذكرى حلوة 🎥", sub: "لحظات متتنسيش..." },
-                reasons: { title: "ليه بحبك؟ 🤔💜", r1: { t: "حنيتك", d: "أحن وأطيب قلب في الدنيا، بتمسح دمعتي قبل ما تنزل." }, r2: { t: "أماني", d: "معاك بحس إني مسنودة على جبل، ولا حاجة تقدر تكسرني." }, r3: { t: "ضحكتك", d: "لما بتضحك الدنيا كلها بتضحكلي، هي علاجي ودوائي." }, r4: { t: "قلبك الأبيض", d: "أنقى وأطيب قلب، بيسامح ويحب بصدق." }, r5: { t: "عيونك", d: "بشوف فيهم مستقبلي وبيتي واولادي وكل دنيتي." }, r6: { t: "وجودك", d: "كفاية بس إنك موجود، ده بيخلي الحياة ليها طعم ولون." } },
-                clock: { start: "يوم ما عرفنا بعض (27/2/2024)", year: "سنة", month: "شهر", day: "يوم", hour: "ساعة", min: "دقيقة", sec: "ثانية" },
+                reasons: { title: "ليه بحبك؟ 🤔💜", r1: { t: "حنيتك", d: "أحن وأطيب قلب في الدنيا، بتمسح دمعتي قبل ما تنزل." }, r2: { t: "أماني", d: "معاك بحس إني مسنودة على جبل، ولا حاجة تقدر تكسرني." }, r3: { t: "ضحكتك", d: "لما بتضحك الدنيا كلها بتضحكلي، هي علاجي ودوائي." }, r4: { t: "قلبك الأبيض", d: "أنقى وأطيب قلب، بيسامح ويحب بصدق." }, r5: { t: "عيونك", d: "بشوف فيهم مستقبلي." }, r6: { t: "وجودك", d: "كفاية بس إنك موجود، ده بيخلي الحياة ليها طعم ولون." } },
+                clock: { start: "الأيام الي قضيناها (27/2/2024)", year: "سنة", month: "شهر", day: "يوم", hour: "ساعة", min: "دقيقة", sec: "ثانية" },
                 footer: { final: "The Final Scene" },
-                envelope: { mylove: "حبيبي 💜", enter: "دخول عالمنا 💜", hint: "إكسري الختم لفتح قلبي ✨", message: "رسالة حب لك..." },
+                envelope: { mylove: "حبيبي 💜", enter: "دخول عالمنا 💜", hint: "", message: "رسالة حب لك..." },
                 finalScene: { scene1: "ولو كان في عمر تاني…<br />هختارك برضه", scene2: "مش مجرد شخص دخل حياتي…", scene2b: "أنت الحياة نفسها.", scene3: "مش مجرد حب…", scene3b: "أنت الأمان، والونس، والبيت.", scene6: "لو الأيام اتشقلبت... ولو الدنيا وقفت ضدنا", scene7: "أنا ثابتة…", scene8: "علشان اخترتك بقلب كامل.", infinity: "إلى ما لا نهاية", back: "الرجوع للرئيسية", thanks: "شكراً إنك جيت حياتي…" },
                 timeline: {
                     title: "خط ذكرياتنا",
                     items: [
-                        { text: "أجمل صدفة في حياتي 💖", date: "ايدي في ايدك", desc: "طول ما ايدينا ماسكة بعض، مبخافش من أي حاجة في الدنيا. أنت قوتي وسندي اللي بتسند عليه لما الدنيا تميل. لمسة ايدك دي بتديني طاقة تهد جبال وتبنيها عشانك يا حبيبي." },
+                        { text: "أجمل صدفة في حياتي 💖", date: "ايدي في ايدك", desc: "طول ما ايدينا ماسكة بعض، مبخافش من أي حاجة في الدنيا. أنت قوتي وسندي اللي بتسند عليه لما الدنيا تميل. لمسة ايدك دي بتديني طاقة تهد جبال وتبنيها عشاني يا حبيبي." },
+                        { text: "مشوار عمرنا سوا ", date: "معاك", desc: "كل خطوة بنمشيها سوا بتبقى أجمل، وايدي في ايدك بتنور طريقي. أنت مش بس حبيبي، أنت رفيق الدرب اللي محليه، ومعاك المشوار مهما كان صعب بيبقى رحلة حب." },
                         { text: "لمسة دفا وحنية 🌍", date: "راحتي", desc: "بلاقي في لمستك كل معاني الحنية والاحتواء، كأن العالم كله بيختفي ومش بيتبقى غيرنا. ايدك هي بيتي ومطرحي، وهي الدفا اللي بحس بيه في عز البرد." },
-                        { text: "مشوار عمرنا سوا 💑", date: "معاك", desc: "كل خطوة بنمشيها سوا بتبقى أجمل، وايدي في ايدك بتنور طريقي. أنت مش بس حبيبي، أنت رفيق الدرب اللي محليه، ومعاك المشوار مهما كان صعب بيبقى رحلة حب في الجنة." },
-                        { text: "وعد وقسم 💍", date: "لآخر العمر", desc: "وعد مني إننا عمرنا ما نسيب ايد بعض أبداً، مهما حصل هفضل ماسكة فيك ومتمسكة بيك لآخر نفس في عمري. ايدنا في ايد بعض ده ميثاق غليظ ومبيتكسرش." },
+                        { text: "وعد 💍", date: "لآخر العمر", desc: "وعد مني إننا عمرنا ما نسيب ايد بعض أبداً، مهما حصل هفضل ماسكة فيك ومتمسكة بيك لآخر نفس في عمري. ايدنا في ايد بعض ده ميثاق غليظ ومبيتكسرش." },
                         { text: "اكتفائي بيك ✨", date: "كل دنيتي", desc: "مش عايزة من الدنيا غير إني أفضل جنبك وماسكة ايدك، ده بالنسبالي بالدنيا وما فيها. كفاية عليا نظرة لعيونك وأنا ماسكة ايدك، بحس إني ملكت الكون كله." }
                     ]
                 }
@@ -844,22 +826,22 @@
             en: {
                 nav: { memories: "Memories", video: "Video", why: "Why I Love You", gallery: "Photos" },
                 hero: { subtitle: "A love story written forever", btn: "Surprise Button ✨" },
-                login: { title: "Our Love Portal", day: "Lucky Day (Day)", btn: "Open Heart", quote: "Every moment together is a beginning..." },
+                login: { title: "Our Love Journey", day: "Lucky Day (Day)", btn: "Open Heart", quote: "Every moment together is a beginning..." },
                 meter: { title: "My Love Meter", label: "Love Percentage", calc: "Calculating love amount...", result: "Result: Infinite Love! ♾️💜", hint: "Click to see the result..." },
                 timeline: { title: "Our Timeline" },
                 video: { title: "Sweet Memory 🎥", sub: "Unforgettable moments..." },
-                reasons: { title: "Why I Love You? 🤔💜", r1: { t: "Your Kindness", d: "The kindest heart in the world, wiping my tears before they fall." }, r2: { t: "My Safety", d: "With you I feel lean on a mountain, nothing can break me." }, r3: { t: "Your Laugh", d: "When you laugh the whole world laughs for me, it's my cure." }, r4: { t: "Your White Heart", d: "The purest heart, forgives and loves sincerely." }, r5: { t: "Your Eyes", d: "I see in them my future, my home, my kids and my whole world." }, r6: { t: "Your Presence", d: "Just your existence is enough, it gives life taste and color." } },
-                clock: { start: "The day we met (27/2/2024)", year: "Year", month: "Month", day: "Day", hour: "Hour", min: "Min", sec: "Sec" },
+                reasons: { title: "Why I Love You? 🤔💜", r1: { t: "Your Kindness", d: "The kindest heart in the world, wiping my tears before they fall." }, r2: { t: "My Safety", d: "With you I feel lean on a mountain, nothing can break me." }, r3: { t: "Your Laugh", d: "When you laugh the whole world laughs for me, it's my cure." }, r4: { t: "Your White Heart", d: "The purest heart, forgives and loves sincerely." }, r5: { t: "Your Eyes", d: "I see in them my future." }, r6: { t: "Your Presence", d: "Just your existence is enough, it gives life taste and color." } },
+                clock: { start: "The days we spent (27/2/2024)", year: "Year", month: "Month", day: "Day", hour: "Hour", min: "Min", sec: "Sec" },
                 footer: { final: "The Final Scene" },
-                envelope: { mylove: "My Love 💜", enter: "Enter Our World 💜", hint: "Break the seal to open my heart ✨", message: "A love message for you..." },
+                envelope: { mylove: "My Love 💜", enter: "Enter Our World 💜", hint: "", message: "A love message for you..." },
                 finalScene: { scene1: "If there were another life...<br />I'd still choose you", scene2: "Not just a person who entered my life...", scene2b: "You are life itself.", scene3: "Not just love...", scene3b: "You are safety, companionship, and home.", scene6: "If the days flipped over... and the world stood against us", scene7: "I am steady...", scene8: "Because I chose you with a complete heart.", infinity: "To Infinity", back: "Back to Home", thanks: "Thank you for coming into my life..." },
                 timeline: {
                     title: "Our Timeline",
                     items: [
-                        { text: "Most beautiful coincidence 💖", date: "My hand in yours", desc: "As long as our hands are together, I fear nothing in the world. You are my strength and support. This touch gives me the energy to move mountains for you, my love." },
+                        { text: "Most beautiful coincidence 💖", date: "My hand in yours", desc: "As long as our hands are together, I fear nothing in the world. You are my strength and support. This touch gives me the energy to move mountains for me, my love." },
+                        { text: "Our life journey together ", date: "With you", desc: "Every step we take together becomes more beautiful, and my hand in yours lights up my path. You are not just my lover, but the companion who makes the journey sweet." },
                         { text: "Warmth and tenderness 🌍", date: "My comfort", desc: "I find in your touch all meanings of tenderness and containment, as if the whole world disappears and only we remain. Your hand is my home and my warmth in the cold." },
-                        { text: "Our life journey together 💑", date: "With you", desc: "Every step we take together becomes more beautiful, and my hand in yours lights up my path. You are not just my lover, but the companion who makes the journey sweet." },
-                        { text: "A promise and an oath 💍", date: "To the end of life", desc: "A promise from me that we will never let go of each other's hands, no matter what happens I will stay holding onto you until my last breath. Our hand in hand is a sacred bond." },
+                        { text: "A promise 💍", date: "To the end of life", desc: "A promise from me that we will never let go of each other's hands, no matter what happens I will stay holding onto you until my last breath. Our hand in hand is a sacred bond." },
                         { text: "My sufficiency in you ✨", date: "My whole world", desc: "I want nothing from the world but to stay by your side holding your hand. That's for me the whole world. Just a look into your eyes while holding your hand, I feel like I own the universe." }
                     ]
                 }
@@ -1033,17 +1015,7 @@
             const [showFinalScene, setShowFinalScene] = useState(false);
             const [isPlaying, setIsPlaying] = useState(false);
             const [selectedImage, setSelectedImage] = useState(null);
-            const [showLongPressSecret, setShowLongPressSecret] = useState(false);
-            const [secretCount, setSecretCount] = useState(0);
             const audioRef = useRef(null);
-
-            useLongPress(() => {
-                if (isLogged && secretCount < 3) {
-                    setShowLongPressSecret(true);
-                    setSecretCount(prev => prev + 1);
-                    setTimeout(() => setShowLongPressSecret(false), 4000);
-                }
-            });
 
             usePulse(isPlaying);
 
@@ -1220,18 +1192,6 @@
 
                             {showFinalScene && <FinalSceneComponent onClose={() => setShowFinalScene(false)} lang={lang} />}
 
-                            {showLongPressSecret && (
-                                <div className="fixed inset-0 z-[300] bg-black/80 backdrop-blur-3xl flex flex-col items-center justify-center animate-fade-in p-8 text-center" onClick={() => setShowLongPressSecret(false)}>
-                                    <div className="animate-scale-up">
-                                        <Heart className="w-24 h-24 text-[#830b9d] mb-8 mx-auto animate-pulse" />
-                                        <h2 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-purple-500 mb-6">سرنا الصغير 🤫</h2>
-                                        <p className="text-2xl text-white/80 font-light leading-relaxed">
-                                            {lang === 'ar' ? 'أنت أجمل حاجة حصلت في دنيتي، ومكتمش عنك حبي ثانية واحدة.' : 'You are the most beautiful thing that happened in my life, and I never hide my love for a single second.'}
-                                        </p>
-                                    </div>
-                                </div>
-                            )}
-
                             {/* Content */}
                             <div className="relative">
                                 {/* Hero Section */}
@@ -1241,7 +1201,6 @@
                                     <h1 className="text-5xl md:text-9xl font-bold mb-4 text-white drop-shadow-sm font-script pb-4 break-words px-4">
                                         ToTo & Etsh
                                     </h1>
-                                    <h2 className="text-3xl md:text-6xl font-bold text-white mb-6 font-sans">ToTo & Etsh</h2>
                                     <p className="text-xl md:text-3xl text-gray-300 mb-10 font-light">{t.hero.subtitle}</p>
 
                                     <button onClick={() => { setShowSecret(true); setTimeout(() => setShowSecret(false), 2000); }}
